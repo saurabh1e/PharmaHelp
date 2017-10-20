@@ -1,4 +1,4 @@
-#Pharma Help
+# Pharma Help
 
 Pharma Help is a angular 4 and Firebase based application which helps small pharmacies in
 India to search for any medicine and get various details like usage, substitutes etc.
