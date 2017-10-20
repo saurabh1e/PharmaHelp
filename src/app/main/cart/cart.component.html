@@ -1,0 +1,56 @@
+<div layout="column" *ngIf="(cart$ | async); let cart" style="position: absolute;height: 100%;max-width: 400px">
+  <mat-list layout-align="start start" flex="80">
+    <ng-container *ngFor="let item of cart.items">
+      <mat-list-item>
+        <h4 matLine flex="">{{item.name}}</h4>
+        <span flex="20">x {{item.quantity}}</span>
+        <span flex="20">
+          <mat-form-field style="width: 100%">
+            <input matInput [value]="item.price" [(ngModel)]="item.price" (change)="_cartService.updatePrice(item, item.price)" type="number">
+
+          </mat-form-field>
+        </span>
+      </mat-list-item>
+      <mat-list-item class="bgc-blue-300">
+        <h4 matLine class="tc-white-4">{{item.quantity * item.price | currency: 'INR':'2.2-2'}}</h4>
+        <span flex></span>
+        <button mat-icon-button="" (click)="_cartService.updateItem(item, item.quantity+1)">
+          <mat-icon class="tc-white-4">arrow_drop_up</mat-icon>
+        </button>
+        <button mat-icon-button="" (click)="_cartService.updateItem(item, item.quantity-1)">
+          <mat-icon class="tc-white-4">arrow_drop_down</mat-icon>
+        </button>
+        <span flex></span>
+        <button mat-icon-button=""  (click)="_cartService.removeItem(item)">
+          <mat-icon class="tc-white-4">delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </ng-container>
+
+  </mat-list>
+  <ng-container *ngIf="cart.items.length">
+    <mat-list layout-align="end end">
+      <mat-list-item class="bgc-blue-300 tc-white-4">
+        <h4 matLine>SUBTOTAL</h4>
+        <span>{{cart.sub_total  | currency: 'INR':'2.2-2'}}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <h4 matLine>DISCOUNT</h4>
+        <span>
+        <mat-form-field style="width: 100%">
+          <input matInput [value]="cart.discount" [(ngModel)]="cart.discount" type="number"
+                 (change)="_cartService.updateDiscount(cart.discount)">
+        </mat-form-field>
+      </span>
+      </mat-list-item>
+      <mat-list-item  class="bgc-blue-300 tc-white-4" style="font-size: 1.4rem;">
+        <h4 matLine>TOTAL</h4>
+        <span>{{cart.total | currency: 'INR':'2.2-2'}}</span>
+      </mat-list-item>
+    </mat-list>
+    <mat-action-row style="padding: 0">
+      <button mat-button mat-raised-button style="margin: 0;border-radius: 0;padding: 8px 0" flex color="accent">PRINT</button>
+      <button mat-button mat-raised-button style="margin: 0;border-radius: 0;padding: 8px 0" flex color="primary">CHECKOUT</button>
+    </mat-action-row>
+  </ng-container>
+</div>

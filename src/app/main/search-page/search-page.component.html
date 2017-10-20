@@ -1,0 +1,126 @@
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav
+                 [opened]="!!(_media.registerQuery('gt-sm') | async)"
+                 [position]="'end'"
+                 layout="column"
+                 [style.width]="(_media.registerQuery('gt-sm') | async) ? '400px' : '90%'"
+                 [mode]="(_media.registerQuery('gt-sm') | async) ? 'side' : 'over'"
+
+    >
+      <app-cart></app-cart>
+
+    </mat-sidenav>
+
+    <form class="example-form" fxLayoutAlign="start start">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search Products" aria-label="State" [matAutocomplete]="auto"
+               [formControl]="stateCtrl">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="showProduct($event)" [displayWith]="displayFn">
+          <mat-option *ngFor="let product of filteredProduct | async" [value]="product">
+            <span>{{ product.name }}</span>&nbsp;|&nbsp;
+            <small>MRP: {{product.mrp | currency: 'INR':'2.2-2'}}</small>
+            <span fxFlex></span>
+            <span>
+            <button mat-raised-button color="accent" (click)="addToCart(product)">ADD</button>
+          </span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+
+    <div fxLayoutAlign="start center">
+
+      <mat-accordion fxFlex [ngStyle.gt-xs]="'margin: 0 20px'" class="product-accordian">
+
+        <mat-expansion-panel *ngFor="let product of filteredProduct | async"
+                             [expanded]="(filteredProduct | async)?.length === 1"
+                             style="margin: 16px 0;padding: 5px 0">
+          <mat-expansion-panel-header layout="row">
+            <mat-panel-title flex="50" flex-xs="90">
+              {{product.name}}
+            </mat-panel-title>
+            <mat-panel-description hide-xs>
+              {{product?.brand?.name}}
+              <mat-icon *ngIf="product.prescription_required" color="warn">star</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div layout="column">
+            <div layout="row" layout-xs="column">
+              <div style="max-width: 80vw" flex="50" flex-xs="100">
+                <mat-tab-group>
+                  <mat-tab>
+              <span *mat-tab-label="">
+                USAGE
+              </span>
+                    <p>
+                      Astorvas 20mg Tablet is used in the treatment of increased cholesterol, increased triglycerides and
+                      increased LDL levels.
+                    </p>
+                  </mat-tab>
+                  <mat-tab>
+              <span *mat-tab-label="">
+                SIDE EFFECTS
+              </span>
+                    <p>
+                      Musculoskeletal (bone, muscle or joint) pain, Allergic reaction, Headache, Nausea, Dyspepsia,
+                      Nasopharyngitis, Increased liver enzymes, Increased creatine phosphokinase (CPK) level in blood,
+                      Diarrhoea, Flatulence, Constipation, Joint swelling, Increased glucose level in blood.
+                    </p>
+                  </mat-tab>
+                  <mat-tab>
+              <span *mat-tab-label="">
+                HOW TO USE
+              </span>
+                    <p>
+                      Take this medicine in the dose and duration as advised by your doctor. Swallow it as a whole. Do not
+                      chew,
+                      crush or break it. It can be taken with or without food, but it is better to take Astorvas 20mg
+                      Tablet at
+                      a fixed time.
+                    </p>
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
+              <span flex="5"></span>
+              <div flex="45" flex-xs="100">
+                <mat-card style="margin: 0;box-shadow: none">
+                  <mat-card-title style="margin-bottom: 12px">SUBSTITUTES</mat-card-title>
+                  <mat-divider></mat-divider>
+                  <mat-card-content>
+                    <mat-list>
+                      <mat-list-item>
+                        <h4 matLine>Barostatin 20mg Tablet</h4>
+                        <span matLine>Baroda Pharma Pvt Ltd</span>
+                        <span> {{122 | currency: 'INR':'2.2-2'}} </span>
+                      </mat-list-item>
+                    </mat-list>
+                  </mat-card-content>
+                </mat-card>
+
+              </div>
+            </div>
+            <mat-action-row layout-align="center center">
+              <div style="font-size: 1rem">
+                {{product.mrp | currency: 'INR': '2.2-2'}}
+              </div>
+              <div flex></div>
+              <div>
+                <button mat-raised-button color="primary" (click)="addToCart(product)">ADD</button>
+              </div>
+            </mat-action-row>
+
+          </div>
+        </mat-expansion-panel>
+
+
+      </mat-accordion>
+
+    </div>
+    <button mat-fab="" hide-gt-xs="" (click)="sidenav.toggle()" class="fixed fixed-button">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+  </mat-sidenav-container>
+

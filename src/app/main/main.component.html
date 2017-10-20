@@ -1,0 +1,36 @@
+<td-layout #layout>
+  <td-navigation-drawer name="Saurabh Gupta"
+                        email="saurabh@zoai.in"
+                        flex sidenavTitle="ZoAi">
+
+    <mat-nav-list>
+      <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
+        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
+          <mat-icon>{{item.icon}}</mat-icon>
+          {{item.title}}</a>
+      </ng-template>
+    </mat-nav-list>
+    <mat-nav-list td-navigation-drawer-menu>
+      <a mat-list-item>
+        <mat-icon>exit_to_app</mat-icon>
+        Sign out</a>
+    </mat-nav-list>
+  </td-navigation-drawer>
+  <td-layout-nav>
+    <div td-toolbar-content layout="row" layout-align="start center" flex>
+      <button mat-icon-button td-menu-button tdLayoutToggle>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="../../assets/icons/logo.png" height="56">
+      <span>PHARMA HELP</span>
+      <span flex></span>
+      <a mat-icon-button target="_blank">
+        <mat-icon>person</mat-icon>
+      </a>
+    </div>
+    <router-outlet></router-outlet>
+
+  </td-layout-nav>
+
+
+</td-layout>

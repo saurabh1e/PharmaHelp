@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@angular/material/theming';
+@import '../node_modules/@covalent/core/theming/all-theme';
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+
+
+  $candy-app-primary: mat-palette($mat-indigo, 500);
+  $candy-app-accent: mat-palette($mat-pink, A200);
+
+  // The warn palette is optional (defaults to red).
+  $candy-app-warn: mat-palette($mat-red);
+
+  // Create the theme object (a Sass map containing all of the palettes).
+  $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+  // Include theme styles for core and each component used in your app.
+  // Alternatively, you can import and @include the theme mixins for each component
+  // that you are using.
+  @include angular-material-theme($candy-app-theme);
+  @include covalent-theme($candy-app-theme);
+
+  .card-selected {
+    border-left: 4px mat-color($candy-app-primary, 400) solid;
+  }
+
+  div .list {
+    background: mat-color($mat-grey, 200);
+  }
+
+  .md-content {
+    background: mat-color($mat-grey, 100);
+  }
+
+  .left-border {
+    border-left: 1px mat-color($candy-app-primary, 100) solid;
+  }
+
+  .right-border {
+    border-right: 1px mat-color($candy-app-primary, 100) solid;
+  }
+
+  .even {
+    border-radius: 2px;
+  }
+
+  .combo-card {
+    border-radius: 5px;
+    border: 2px solid mat-color($candy-app-accent, 200);
+  }
+  .variation-card {
+    border-radius: 5px;
+    border: 2px solid mat-color($candy-app-accent, 200);
+    color: mat-color($candy-app-accent, A400);
+  }
+
+  .variation-card-selected {
+    border-radius: 5px;
+    border: 2px solid mat-color($candy-app-accent, 500, 1);
+    background: mat-color($candy-app-accent, 400, 0.8);
+    color: white !important;
+  }
+
+  .odd {
+    background: mat-color($candy-app-primary, 50, 0.6);
+    border-radius: 2px;
+  }
+  .active {
+    background: mat-color($candy-app-primary, 50, 0.6);
+  }
+  /deep/ td-layout-nav-list mat-toolbar {
+    box-shadow: none !important;
+  }
+  /deep/ {
+    .mat-form-field-infix {
+      border: 0 !important;
+    }
+    .mat-form-field {
+      width: unset !important;
+    }
+    .mat-form-field-underline {
+      background-color: #cbcbcb !important;
+    }
+  }
+.app-content{
+  margin: auto;
+  height: 100vh;
+  background: mat-color($candy-app-accent, 700);
+
+}
+/deep/ {
+  .mat-expanded {
+    .mat-expansion-panel-header {
+      background-color: mat-color($candy-app-accent, 50)!important;
+    }
+    .mat-expansion-panel-header.mat-expanded:focus, .mat-expansion-panel-header.mat-expanded:hover {
+      background-color: mat-color($candy-app-accent, 50)!important;
+    }
+  }
+}

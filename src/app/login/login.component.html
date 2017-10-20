@@ -1,0 +1,19 @@
+<div class="app-content" fxLayout="column" fxLayoutAlign="center center">
+  <div class="group" >
+
+    <form role="form">
+      <mat-form-field style="width: 100%">
+        <span matPrefix>+91 &nbsp;</span>
+        <input type="tel" matInput placeholder="Phone Number" [(ngModel)]="userNumber" name="phoneNumber">
+        <mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      <div fxLayoutAlign="end end">
+        <button mat-raised-button  color="primary" id="sign-in-button" type="submit"
+                (click)="signIn(userNumber)"
+                name="action">LOGIN</button><br><br>
+      </div>
+    </form >
+  </div>
+</div>
+
+
