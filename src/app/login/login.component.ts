@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userSub = this._userService.user$.subscribe((user) => {
-      if (user.uid) {
+      if (user && user.uid) {
+        console.log(this._userService.redirectUrl);
         if (this._userService.redirectUrl) {
           this._router.navigate([this._userService.redirectUrl]).then();
         } else {
